@@ -1,4 +1,4 @@
-package com.heroku.module3.model;
+package ua.garmash.module4.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,8 +19,7 @@ public class Lecturer {
     private String lastName;
     private int age;
 
-    @OneToOne
-    private Subject subject;
+    private String subject_id;
 
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-package com.heroku.module3.config;
+package ua.garmash.module4.config;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
