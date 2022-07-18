@@ -27,7 +27,7 @@ abstract class AbstractDao<T> {
         transaction.commit();
     }
 
-    public T getById(String id) {
+    public T getById(long id) {
         final EntityManager entityManager = HibernateFactoryUtil.getEntityManager();
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<T> query = criteriaBuilder.createQuery(aClass);
@@ -43,5 +43,14 @@ abstract class AbstractDao<T> {
         final Root<T> from = query.from(aClass);
         query.select(from);
         return entityManager.createQuery(query).getResultList();
+    }
+
+    public List<Object[]> getSummary() {
+        final EntityManager entityManager = HibernateFactoryUtil.getEntityManager();
+        final String sqlQuery = "SELECT Count(detail.id), " +
+                "Sum(detail.amountofbrokenchips), " +
+                "Sum(detail.producedfuel) " +
+                "FROM detail;";
+        return entityManager.createNativeQuery(sqlQuery).getResultList();
     }
 }

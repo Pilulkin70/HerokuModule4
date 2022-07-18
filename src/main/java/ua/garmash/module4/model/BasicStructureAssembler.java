@@ -4,12 +4,14 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static ua.garmash.module4.Main.RANDOM;
+import static ua.garmash.module4.service.DetailFactory.RANDOM;
 
 public class BasicStructureAssembler implements Runnable {
     private static final AtomicInteger commonProgressBasicOperations = new AtomicInteger(0);
     private static final int reloadTime = 2000;
     private static final int maxProgress = 100;
+    private static final int pointsToStepMin = 5;
+    private static final int pointsToStepMax = 10;
     private final CyclicBarrier barrier;
 
     public BasicStructureAssembler(CyclicBarrier barrier) {
@@ -18,11 +20,9 @@ public class BasicStructureAssembler implements Runnable {
 
     @Override
     public void run() {
-        int localProgress;
         while (commonProgressBasicOperations.get() < maxProgress && !Thread.currentThread().isInterrupted()) {
             try {
-                localProgress = RANDOM.nextInt(5, 11);
-                commonProgressBasicOperations.addAndGet(localProgress);
+                commonProgressBasicOperations.addAndGet(RANDOM.nextInt(pointsToStepMin, pointsToStepMax + 1));
                 Thread.sleep(reloadTime);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());

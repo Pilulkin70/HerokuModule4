@@ -3,7 +3,7 @@ package ua.garmash.module4.model;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static ua.garmash.module4.Main.RANDOM;
+import static ua.garmash.module4.service.DetailFactory.RANDOM;
 import static ua.garmash.module4.service.DetailFactory.fuelBalance;
 
 public class FinalCollector implements Callable<Integer> {

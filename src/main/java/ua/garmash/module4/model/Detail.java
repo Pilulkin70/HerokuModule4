@@ -28,6 +28,7 @@ public class Detail {
     private int producedFuel;
     private int usedFuel;
     private int amountOfBrokenChips;
+    private String status;
 
     public static class Builder {
         private final Detail detail;
@@ -37,6 +38,7 @@ public class Detail {
             detail = new Detail();
             detail.setDate(LocalDate.now());
             detail.setStartTimestamp(LocalTime.now());
+            detail.setStatus(DetailStatus.UNFINISHED.name());
         }
 
         public Builder startProduceFuel() {
@@ -72,8 +74,8 @@ public class Detail {
             Future<Integer> future = executor.submit(new FinalCollector());
             executorShutdown(executor);
 
-            System.out.println("Final assembling done. Fuel used " + future.get());
             detail.setFinishTimestamp(LocalTime.now());
+            System.out.println("Final assembling done. Fuel used " + future.get());
             detail.setUsedFuel(future.get());
             detail.setProducedFuel(future.get() + fuelBalance.get());
             return this;
@@ -82,6 +84,7 @@ public class Detail {
         public Detail finalizeAndGetResult() {
             fuelProducer.interrupt();
             System.out.println("Fuel remaining " + fuelBalance.get());
+            detail.setStatus(DetailStatus.FINISHED.name());
             return detail;
         }
 

@@ -1,6 +1,6 @@
 package ua.garmash.module4.model;
 
-import static ua.garmash.module4.Main.RANDOM;
+import static ua.garmash.module4.service.DetailFactory.RANDOM;
 import static ua.garmash.module4.service.DetailFactory.fuelBalance;
 
 public class FuelProducer extends Thread {
