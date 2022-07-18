@@ -1,19 +1,26 @@
 package ua.garmash.module4.model;
 
 import static ua.garmash.module4.Main.RANDOM;
-import static ua.garmash.module4.Main.fuelBalance;
+import static ua.garmash.module4.service.DetailFactory.fuelBalance;
 
 public class FuelProducer extends Thread {
+    private final static int transportTime = 3000;
+    private final static int producedFuelPerStepMin = 500;
+    private final static int producedFuelPerStepMax = 1000;
+
     @Override
     public void run() {
-        final int transportTime = 3000;
-        System.out.println("Fuel is " + fuelBalance.get());
+        int producedFuelOnCurrentStep;
         while (!isInterrupted()) {
             try {
-                fuelBalance.addAndGet(RANDOM.nextInt(500, 1001));
+                producedFuelOnCurrentStep = RANDOM.nextInt(producedFuelPerStepMin,
+                        producedFuelPerStepMax + 1);
+                fuelBalance.addAndGet(producedFuelOnCurrentStep);
                 Thread.sleep(transportTime);
             } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+                if (!e.getMessage().equals("sleep interrupted")) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             }
         }

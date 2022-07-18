@@ -4,26 +4,28 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static ua.garmash.module4.Main.RANDOM;
-import static ua.garmash.module4.Main.fuelBalance;
+import static ua.garmash.module4.service.DetailFactory.fuelBalance;
 
 public class FinalCollector implements Callable<Integer> {
     private static final AtomicInteger commonFinalAssemblyProgress = new AtomicInteger(0);
+    private static final int reloadTime = 1000;
+    private static final int maxProgress = 100;
+    private static final int needFuelPerStepMin = 350;
+    private static final int needFuelPerStepMax = 700;
+    private static final int pointsToStep = 10;
 
     @Override
     public Integer call() {
-        final int reloadTime = 1000;
-        final int maxProgress = 100;
         int fuelUsed = 0;
         int needFuel;
-        while (commonFinalAssemblyProgress.get() < maxProgress) {
+        while (commonFinalAssemblyProgress.get() < maxProgress && !Thread.currentThread().isInterrupted()) {
             try {
-                needFuel = RANDOM.nextInt(350, 701);
-                while (fuelBalance.get() < needFuel) {
+                needFuel = RANDOM.nextInt(needFuelPerStepMin, needFuelPerStepMax + 1);
+                while (fuelBalance.get() < needFuel && !Thread.currentThread().isInterrupted()) {
                 }
                 fuelBalance.set(fuelBalance.get() - needFuel);
-                commonFinalAssemblyProgress.addAndGet(10);
+                commonFinalAssemblyProgress.addAndGet(pointsToStep);
                 fuelUsed += needFuel;
-                System.out.println(Thread.currentThread().getName() + "  " + commonFinalAssemblyProgress.get());
                 Thread.sleep(reloadTime);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());

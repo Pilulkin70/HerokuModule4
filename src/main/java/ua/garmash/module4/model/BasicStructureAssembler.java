@@ -8,6 +8,8 @@ import static ua.garmash.module4.Main.RANDOM;
 
 public class BasicStructureAssembler implements Runnable {
     private static final AtomicInteger commonProgressBasicOperations = new AtomicInteger(0);
+    private static final int reloadTime = 2000;
+    private static final int maxProgress = 100;
     private final CyclicBarrier barrier;
 
     public BasicStructureAssembler(CyclicBarrier barrier) {
@@ -16,12 +18,11 @@ public class BasicStructureAssembler implements Runnable {
 
     @Override
     public void run() {
-        final int reloadTime = 2000;
-        final int maxProgress = 100;
-        while (commonProgressBasicOperations.get() < maxProgress) {
+        int localProgress;
+        while (commonProgressBasicOperations.get() < maxProgress && !Thread.currentThread().isInterrupted()) {
             try {
-                commonProgressBasicOperations.addAndGet(RANDOM.nextInt(5, 11));
-                System.out.println(Thread.currentThread().getName() + "  " + commonProgressBasicOperations.get());
+                localProgress = RANDOM.nextInt(5, 11);
+                commonProgressBasicOperations.addAndGet(localProgress);
                 Thread.sleep(reloadTime);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
