@@ -7,7 +7,6 @@ import static ua.garmash.module4.service.DetailFactory.RANDOM;
 import static ua.garmash.module4.service.DetailFactory.fuelBalance;
 
 public class FinalAssembler implements Callable<Integer> {
-    private static final AtomicInteger commonFinalAssemblyProgress = new AtomicInteger(0);
     private static final int reloadTime = 1000;
     private static final int maxProgress = 100;
     private static final int needFuelPerStepMin = 350;
@@ -16,23 +15,23 @@ public class FinalAssembler implements Callable<Integer> {
 
     @Override
     public Integer call() {
+        int commonFinalAssemblyProgress = 0;
         int fuelUsed = 0;
         int needFuel;
-        while (commonFinalAssemblyProgress.get() < maxProgress && !Thread.currentThread().isInterrupted()) {
+        while (commonFinalAssemblyProgress < maxProgress && !Thread.currentThread().isInterrupted()) {
+            needFuel = RANDOM.nextInt(needFuelPerStepMin, needFuelPerStepMax + 1);
+            while (fuelBalance.get() < needFuel && !Thread.currentThread().isInterrupted()) {
+            }
+            fuelBalance.set(fuelBalance.get() - needFuel);
+            commonFinalAssemblyProgress += pointsToStep;
+            fuelUsed += needFuel;
             try {
-                needFuel = RANDOM.nextInt(needFuelPerStepMin, needFuelPerStepMax + 1);
-                while (fuelBalance.get() < needFuel && !Thread.currentThread().isInterrupted()) {
-                }
-                fuelBalance.set(fuelBalance.get() - needFuel);
-                commonFinalAssemblyProgress.addAndGet(pointsToStep);
-                fuelUsed += needFuel;
                 Thread.sleep(reloadTime);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
                 break;
             }
         }
-        commonFinalAssemblyProgress.set(0);
         return fuelUsed;
     }
 }

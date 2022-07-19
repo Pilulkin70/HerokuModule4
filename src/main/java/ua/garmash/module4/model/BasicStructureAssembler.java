@@ -21,8 +21,8 @@ public class BasicStructureAssembler implements Runnable {
     @Override
     public void run() {
         while (commonProgressBasicOperations.get() < maxProgress && !Thread.currentThread().isInterrupted()) {
+            commonProgressBasicOperations.addAndGet(RANDOM.nextInt(pointsToStepMin, pointsToStepMax + 1));
             try {
-                commonProgressBasicOperations.addAndGet(RANDOM.nextInt(pointsToStepMin, pointsToStepMax + 1));
                 Thread.sleep(reloadTime);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());

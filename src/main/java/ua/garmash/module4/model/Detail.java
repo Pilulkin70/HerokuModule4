@@ -41,6 +41,7 @@ public class Detail {
         public Builder startProduceFuel() {
             fuelProducer = new FuelProducer();
             fuelProducer.start();
+            System.out.println("Fuel producing is started");
             return this;
         }
 

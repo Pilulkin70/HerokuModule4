@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DetailFactory {
     public static final Random RANDOM = new Random();
     public static final AtomicInteger fuelBalance = new AtomicInteger(0);
-
     public static volatile boolean producingInProgress = false;
 
     public static void produce() {
