@@ -6,6 +6,7 @@
     <persistence-unit name="persistence">
         <description>Hibernate Entity Manager Example</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>ua.garmash.module4.model.Detail</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
@@ -15,4 +16,5 @@
             <property name="hibernate.show_sql" value="false"/>
         </properties>
     </persistence-unit>
+
 </persistence>
