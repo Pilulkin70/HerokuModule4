@@ -21,8 +21,8 @@ public class DetailFactory {
             try {
                 detailDao.save(new Detail.Builder()
                         .startProduceFuel()
-                        .doBasicStructureAssembling()
-                        .doChipProgramming()
+/*                        .doBasicStructureAssembling()
+                        .doChipProgramming()*/
                         .doFinalAssembling()
                         .finalizeAndGetResult());
             } catch (ExecutionException | InterruptedException e) {
