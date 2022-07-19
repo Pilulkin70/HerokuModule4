@@ -14,16 +14,17 @@ import java.util.List;
 
 @WebServlet(name = "ListServlet", value = "/list")
 public class ListServlet extends HttpServlet {
+    private DetailDao detailDao;
 
     @Override
     public void init() throws ServletException {
         super.init();
+        detailDao = new DetailDao();
         System.out.println(getServletName() + " initialized");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DetailDao detailDao = new DetailDao();
         final List<Detail> infoList = new ArrayList<>(detailDao.getAll());
         req.setAttribute("infoList", infoList);
         getServletContext().getRequestDispatcher("/showList.jsp").forward(req, resp);

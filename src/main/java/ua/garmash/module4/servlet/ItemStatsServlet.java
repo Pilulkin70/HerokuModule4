@@ -14,9 +14,12 @@ import java.util.Arrays;
 
 @WebServlet(name = "ItemStatsServlet", urlPatterns = {"/stats/*"})
 public class ItemStatsServlet extends HttpServlet {
+    private DetailDao detailDao;
+
     @Override
     public void init() throws ServletException {
         super.init();
+        detailDao = new DetailDao();
         System.out.println(getServletName() + " initialized");
     }
 
@@ -28,7 +31,6 @@ public class ItemStatsServlet extends HttpServlet {
 
         req.setAttribute("detailInfo", new ArrayList<>(Arrays.asList(detail)));
         getServletContext().getRequestDispatcher("/showItemInfo.jsp").forward(req, resp);
-
     }
 
     @Override
