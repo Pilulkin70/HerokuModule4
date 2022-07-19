@@ -38,8 +38,6 @@ package ua.garmash.module4;
 import ua.garmash.module4.config.HibernateFactoryUtil;
 import ua.garmash.module4.service.DetailFactory;
 
-import java.util.concurrent.*;
-
 public class Main {
 
     public static void main(String[] args) {

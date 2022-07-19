@@ -1,9 +1,7 @@
 package ua.garmash.module4.servlet;
 
-import ua.garmash.module4.config.HibernateFactoryUtil;
 import ua.garmash.module4.dao.DetailDao;
 import ua.garmash.module4.model.Detail;
-import ua.garmash.module4.service.DetailFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
