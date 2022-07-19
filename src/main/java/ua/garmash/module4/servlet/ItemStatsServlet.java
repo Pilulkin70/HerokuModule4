@@ -25,7 +25,7 @@ public class ItemStatsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        DetailDao detailDao = new DetailDao();
+        detailDao = new DetailDao();
         String idToSearch = req.getPathInfo().replaceAll("[^0-9]", "");
         Detail detail = detailDao.getById(Long.parseLong(idToSearch));
 

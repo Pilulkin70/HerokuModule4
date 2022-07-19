@@ -33,6 +33,7 @@ public class SummaryStatsServlet extends HttpServlet {
         });
         PrintWriter responseBody = resp.getWriter();
         resp.setContentType("text/html");
+        responseBody.println("<title>Summary</title>");
         responseBody.println("<h1 align=\"center\" style=\"color:#ff0000\">Summary statistics:</h1>");
         responseBody.println("<h1 align=\"center\"> </h1>");
         responseBody.println(String.format("<h2 align=\"center\" style=\"color:#00ff00\">" +
