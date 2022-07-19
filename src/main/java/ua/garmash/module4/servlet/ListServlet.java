@@ -14,6 +14,7 @@ import java.util.List;
 
 @WebServlet(name = "ListServlet", value = "/list")
 public class ListServlet extends HttpServlet {
+    private final List<Detail> infoList = new ArrayList<>();
     @Override
     public void init() throws ServletException {
         super.init();
@@ -22,7 +23,6 @@ public class ListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Detail> infoList = new ArrayList<>();
         DetailDao detailDao= new DetailDao();
         infoList.addAll(detailDao.getAll());
         req.setAttribute("infoList", infoList);
