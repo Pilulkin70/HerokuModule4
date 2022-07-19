@@ -29,30 +29,24 @@ public class SummaryStatsServlet extends HttpServlet {
                 resultArray.add((Long) result[i]);
             }
         });
-
         PrintWriter responseBody = resp.getWriter();
         resp.setContentType("text/html");
-        responseBody.println("<h1 align=\"center\" style=\"color:#ff0000\">Summary statistic</h1>");
+        responseBody.println("<h1 align=\"center\" style=\"color:#ff0000\">Summary statistics:</h1>");
         responseBody.println("<h1 align=\"center\"> </h1>");
-        responseBody.println(String.format("<h2 align=\"center\" style=\"color:#00ff00\">Number of manufactured details: %d </h2>",
-                resultArray.get(0)));
+        responseBody.println(String.format("<h2 align=\"center\" style=\"color:#00ff00\">" +
+                "Total number of manufactured details: %d </h2>", resultArray.get(0)));
         if (resultArray.get(1) != null) {
-            responseBody.println(String.format("<h2 align=\"center\" style=\"color:#ff8800\">Number of broken chips: %d</h2>",
-                    resultArray.get(1)));
+            responseBody.println(String.format("<h2 align=\"center\" style=\"color:#ff8800\">" +
+                    "Total number of broken chips: %d</h2>", resultArray.get(1)));
         }
         if (resultArray.get(2) != null) {
-            responseBody.println(String.format("<h2 align=\"center\" style=\"color:#55aaff\">Produced fuel: %d</h2>",
-                    resultArray.get(2)));
+            responseBody.println(String.format("<h2 align=\"center\" style=\"color:#55aaff\">" +
+                    "Total fuel produced: %d</h2>", resultArray.get(2)));
         }
         responseBody.println("<div style=\"text-align:center\">" +
-                "<INPUT TYPE=\"button\" VALUE=\"Back\" onClick=\"history.go(-1);\">" +
+                "<INPUT TYPE=\"button\" VALUE=\"Back\" style=\"width:100px;height:25px\" onClick=\"history.go(-1);\">" +
                 "</div>");
         responseBody.close();
-
-
-//        Detail detail = detailDao.getById(1);
-/*        req.setAttribute("infoList", infoList);
-        getServletContext().getRequestDispatcher("/showList.jsp").forward(req, resp);*/
     }
 
     @Override

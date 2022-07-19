@@ -29,6 +29,7 @@ public class ChipProgrammer implements Callable<Integer> {
                 break;
             }
         }
+        commonProgressChipProgramming.set(0);
         return numberOfBrokenChips;
     }
 

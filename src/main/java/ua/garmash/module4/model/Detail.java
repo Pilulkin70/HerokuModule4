@@ -17,9 +17,6 @@ import static ua.garmash.module4.service.DetailFactory.fuelBalance;
 @NoArgsConstructor
 public class Detail {
     @Id
-/*    @GeneratedValue(strategy = GenerationType.AUTO, generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;*/
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private LocalDate date;
@@ -71,7 +68,7 @@ public class Detail {
 
         public Builder doFinalAssembling() throws ExecutionException, InterruptedException {
             final ExecutorService executor = Executors.newSingleThreadExecutor();
-            Future<Integer> future = executor.submit(new FinalCollector());
+            Future<Integer> future = executor.submit(new FinalAssembler());
             executorShutdown(executor);
 
             detail.setFinishTimestamp(LocalTime.now());

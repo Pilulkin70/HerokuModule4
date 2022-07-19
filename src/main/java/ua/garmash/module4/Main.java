@@ -42,7 +42,7 @@ import java.util.concurrent.*;
 
 public class Main {
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) {
         HibernateFactoryUtil.init();
         DetailFactory.produce();
     }

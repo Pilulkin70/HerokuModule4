@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static ua.garmash.module4.service.DetailFactory.RANDOM;
 import static ua.garmash.module4.service.DetailFactory.fuelBalance;
 
-public class FinalCollector implements Callable<Integer> {
+public class FinalAssembler implements Callable<Integer> {
     private static final AtomicInteger commonFinalAssemblyProgress = new AtomicInteger(0);
     private static final int reloadTime = 1000;
     private static final int maxProgress = 100;
@@ -32,6 +32,7 @@ public class FinalCollector implements Callable<Integer> {
                 break;
             }
         }
+        commonFinalAssemblyProgress.set(0);
         return fuelUsed;
     }
 }

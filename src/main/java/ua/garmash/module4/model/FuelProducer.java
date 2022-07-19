@@ -10,12 +10,10 @@ public class FuelProducer extends Thread {
 
     @Override
     public void run() {
-        int producedFuelOnCurrentStep;
         while (!isInterrupted()) {
             try {
-                producedFuelOnCurrentStep = RANDOM.nextInt(producedFuelPerStepMin,
-                        producedFuelPerStepMax + 1);
-                fuelBalance.addAndGet(producedFuelOnCurrentStep);
+                fuelBalance.addAndGet(RANDOM.nextInt(producedFuelPerStepMin,
+                        producedFuelPerStepMax + 1));
                 Thread.sleep(transportTime);
             } catch (InterruptedException e) {
                 if (!e.getMessage().equals("sleep interrupted")) {
