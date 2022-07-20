@@ -14,17 +14,16 @@ import java.util.List;
 
 @WebServlet(name = "SummaryStatsServlet", urlPatterns = {"/stats"})
 public class SummaryStatsServlet extends HttpServlet {
-    private DetailDao detailDao;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        detailDao = new DetailDao();
         System.out.println(getServletName() + " initialized");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        final DetailDao detailDao = new DetailDao();
         List<Long> resultArray = new ArrayList<>(3);
         detailDao.getSummary().forEach(result -> {
             for (int i = 0; i < 3; i++) {

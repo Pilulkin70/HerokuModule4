@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-@WebServlet(name = "ItemStatsServlet", urlPatterns = {"/stats/*"})
-public class ItemStatsServlet extends HttpServlet {
+@WebServlet(name = "DeleteItemServlet", urlPatterns = {"/delete/*"})
+public class DeleteItemServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
@@ -26,9 +24,11 @@ public class ItemStatsServlet extends HttpServlet {
         final DetailDao detailDao = new DetailDao();
         String idToSearch = req.getPathInfo().replaceAll("\\D", "");
         Detail detail = detailDao.getById(Long.parseLong(idToSearch));
-
-        req.setAttribute("detailInfo", new ArrayList<>(Arrays.asList(detail)));
-        getServletContext().getRequestDispatcher("/showItemInfo.jsp").forward(req, resp);
+        detailDao.delete(detail);
+        String homePath = req.getContextPath();
+        req.setAttribute("idDeletedItem", idToSearch);
+        req.setAttribute("homePath", homePath);
+        getServletContext().getRequestDispatcher("/isdelete.jsp").forward(req, resp);
     }
 
     @Override

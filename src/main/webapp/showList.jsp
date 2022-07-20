@@ -24,6 +24,7 @@
             <th><i> Start time </i></th>
             <th><i> Finish time </i></th>
             <th><i> Status </i></th>
+            <th> </th>
         </tr>
         <c:forEach items="${infoList}" var="info">
             <tr align="center">
@@ -33,12 +34,13 @@
                 <td>${fn:substring(info.startTimestamp,0,8)}</td>
                 <td>${fn:substring(info.finishTimestamp,0,8)}</td>
                 <td>${info.status}</td>
+                <td width="20pt"><a href="delete/${info.id}"><img src="${pageContext.request.contextPath}/delet.png" alt="" title="Delete" width="100%" height="100%"></a></td>
             </tr>
         </c:forEach>
     </table>
 </section>
 <div style="margin-left: 7%; padding: 20px;">
-    <INPUT TYPE="button" VALUE="Back" style="width:100px;height:25px" onClick="history.go(-1);">
+    <INPUT TYPE="button" VALUE="Home" style="width:100px;height:25px" onClick="window.location='index.html'">
 </div>
 </body>
 </html>
