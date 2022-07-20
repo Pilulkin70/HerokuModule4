@@ -13,10 +13,12 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "ClearServlet", value = "/race/clear")
 public class ClearTableServlet extends HttpServlet {
+    private static DetailDao detailDao;
 
     @Override
     public void init() throws ServletException {
         super.init();
+        detailDao = new DetailDao();
         System.out.println(getServletName() + " initialized");
     }
 
@@ -24,7 +26,6 @@ public class ClearTableServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         if (!DetailFactory.producingInProgress) {
-            final DetailDao detailDao = new DetailDao();
             detailDao.deleteAll();
             PrintWriter responseBody = resp.getWriter();
             resp.setContentType("text/html");
@@ -36,7 +37,6 @@ public class ClearTableServlet extends HttpServlet {
         } else {
             req.getRequestDispatcher("/wait.jsp").forward(req, resp);
         }
-
     }
 
     @Override

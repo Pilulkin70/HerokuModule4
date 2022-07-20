@@ -16,7 +16,6 @@ public class DetailFactory {
         System.out.println("Lets do it!");
         if (!producingInProgress) {
             producingInProgress = true;
-            fuelBalance.set(0);
             DetailDao detailDao = new DetailDao();
             try {
                 detailDao.save(new Detail.Builder()

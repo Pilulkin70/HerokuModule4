@@ -13,16 +13,17 @@ import java.util.*;
 
 @WebServlet(name = "ListServlet", value = "/list")
 public class ListServlet extends HttpServlet {
+    private static DetailDao detailDao;
 
     @Override
     public void init() throws ServletException {
         super.init();
+        detailDao = new DetailDao();
         System.out.println(getServletName() + " initialized");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final DetailDao detailDao = new DetailDao();
         final List<Detail> infoList = new ArrayList<>(detailDao.getAll());
         infoList.sort(Comparator.comparing(Detail::getId));
         req.setAttribute("infoList", infoList);
